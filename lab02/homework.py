@@ -21,8 +21,8 @@ def mean_odd(array):
     Returns:
         result: float, the mean of all the odd elements in the input array
     """
-
-    return
+            
+    return array[array % 2 == 1].mean()
 
 
 def train(data_X, data_y):
@@ -38,4 +38,6 @@ def train(data_X, data_y):
 
     """
 
-    return
+    return  linear_model.LinearRegression().fit(data_X, data_y)
+
+
