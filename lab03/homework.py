@@ -22,8 +22,17 @@ def model_prediction(data_X, beta):
     Returns:
         labels: an array of shape (N) containing the model class predictions (0/1)
     """
+    
+    N,_=data_X.shape
 
-    return
+    # compute the prediction
+    y_pred=(1 / (1 + np.exp(-np.hstack((np.ones((data_X.shape[0], 1)), data_X))@beta)))
+
+    # return the hard decision
+    return y_pred > 0.5
+
+    #one liner
+    #return  (1 / (1 + np.exp(-np.hstack((np.ones((data_X.shape[0], 1)), data_X))@beta))) > 0.5
 
 
 def logistic_loss_derivative(data_X, data_y, beta):
@@ -40,8 +49,20 @@ def logistic_loss_derivative(data_X, data_y, beta):
               function with respect to beta averaged over data_X
     """
 
-    return
+    N,_=data_X.shape
 
+    # compute the prediction
+    y_pred=(1 / (1 + np.exp(-np.hstack((np.ones((data_X.shape[0], 1)), data_X))@beta)))
+
+    # compute the gradient (element-wise multiplication with (error)*(1 x^i))
+    grad=(y_pred-data_y).reshape(-1,1)*np.hstack((np.ones((data_X.shape[0], 1)), data_X))
+
+    # average over the data
+    return grad.mean(axis=0)
+    
+    # one liner 
+    #return ((1 / (1 + np.exp(-np.hstack((np.ones((data_X.shape[0], 1)), data_X))@beta)) - data_y).reshape(-1,1) * np.hstack((np.ones((data_X.shape[0], 1)), data_X))).mean(axis=0)
+   
 
 def gradient_descent(data_X, data_y, beta_0, stepsize, iterates):
     """
