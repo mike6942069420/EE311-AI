@@ -57,7 +57,7 @@ def logistic_loss_derivative(data_X, data_y, beta):
     # compute the gradient (element-wise multiplication with (error)*(1 x^i))
     grad=(y_pred-data_y).reshape(-1,1)*np.hstack((np.ones((data_X.shape[0], 1)), data_X))
 
-    # average over the data
+    # average over the columns
     return grad.mean(axis=0)
     
     # one liner 
