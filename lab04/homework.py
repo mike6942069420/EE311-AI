@@ -21,8 +21,7 @@ def compute_accuracy(y_predicted, y_ground_truth):
         accuracy: float between 0.0 and 1.0, the proportion of correct predictions
     """
 
-    return
-
+    return (y_predicted == y_ground_truth).mean()
 
 def smv_decision(w, b, X):
     """
@@ -37,7 +36,7 @@ def smv_decision(w, b, X):
         labels: array (N, ) containing the binary class predictions (0/1)
     """
 
-    return
+    return (X@w + b) > 0
 
 
 def transform_space(X):
@@ -49,7 +48,7 @@ def transform_space(X):
         X: array (N, 2), a dataset of N points with 2 features
 
     Returns:
-        X_transformed: array (N, 2), the tranfsormed dataset, with X_transformed[i, :] the transform of X[i, :]
+        X_transformed: array (N, 2), the transformed dataset, with X_transformed[i, :] the transform of X[i, :]
     """
 
-    return
+    return abs(X)
